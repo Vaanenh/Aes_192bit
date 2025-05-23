@@ -17,9 +17,6 @@ module tb_aes_decipher_block();
   parameter AES_ENCIPHER = 1'b1;
 
 
-  //----------------------------------------------------------------
-  // Register and Wire declarations.
-  //----------------------------------------------------------------
   reg [31 : 0]   cycle_ctr;
   reg [31 : 0]   error_ctr;
   reg [31 : 0]   tc_ctr;
