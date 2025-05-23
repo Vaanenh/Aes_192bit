@@ -19,10 +19,6 @@ module aes_encipher_block(
                           output wire           ready
                          );
 
-
-  //----------------------------------------------------------------
-  // Internal constant and parameter definitions.
-  //----------------------------------------------------------------
 localparam AES_128_BIT_KEY = 2'h0;
 localparam AES_192_BIT_KEY = 2'h1;
 localparam AES_256_BIT_KEY = 2'h2;
