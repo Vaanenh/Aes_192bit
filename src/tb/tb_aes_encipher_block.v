@@ -462,7 +462,7 @@ endtask // test_nist_enc_192_1
       ciphertext = 128'h974104846d0ad3ad7734ecb3ecee4eef;
 
       $display("--- test_nist_enc_192_2: Started.");
-      test_ecb_enc(1'bX, plaintext, ciphertext);  // s?a sau n?u tb_keylen c?n thêm 192-bit ch? th?
+      test_ecb_enc(1'bX, plaintext, ciphertext);  // s?a sau n?u tb_keylen c?n thÃªm 192-bit ch? th?
       $display("--- test_nist_enc_192_2: Completed.");
       $display("");
     end
@@ -623,6 +623,3 @@ endtask // test_nist_enc_192_1
     end // tb_aes_encipher_block
 endmodule // tb_aes_encipher_block
 
-//======================================================================
-// EOF tb_aes_encipher_block.v
-//======================================================================
