@@ -14,7 +14,7 @@ module tb_aes_key_mem();
 
   parameter AES_128_BIT_KEY = 0;
   parameter AES_256_BIT_KEY = 1;
-  parameter AES_192_BIT_KEY = 2; //Gán giá tri cho aes 192bit
+  parameter AES_192_BIT_KEY = 2; //GÃ¡n giÃ¡ tri cho aes 192bit
 
   parameter AES_128_NUM_ROUNDS = 10;
   parameter AES_256_NUM_ROUNDS = 14;
@@ -34,7 +34,7 @@ module tb_aes_key_mem();
   reg            tb_clk;
   reg            tb_reset_n;
   reg [255 : 0]  tb_key;
-  reg            tb_keylen;
+  reg [1:0]      tb_keylen;
   reg            tb_init;
   reg [3 : 0]    tb_round;
   wire [127 : 0] tb_round_key;
@@ -125,15 +125,15 @@ module tb_aes_key_mem();
       $display("rcon_reg = 0x%01x, rcon_new = 0x%01x,  rcon_set = 0x%01x,  rcon_next = 0x%01x, rcon_we = 0x%01x",
                dut.rcon_reg, dut.rcon_new, dut.rcon_set, dut.rcon_next, dut.rcon_we);
 
-      $display("w0 = 0x%04x, w1 = 0x%04x, w2 = 0x%04x, w3 = 0x%04x",
-               dut.round_key_gen.w0, dut.round_key_gen.w1,
-               dut.round_key_gen.w2, dut.round_key_gen.w3);
-      $display("w4 = 0x%04x, w5 = 0x%04x, w6 = 0x%04x, w7 = 0x%04x",
-               dut.round_key_gen.w4, dut.round_key_gen.w5,
-               dut.round_key_gen.w6, dut.round_key_gen.w7);
-      $display("sboxw = 0x%04x, new_sboxw = 0x%04x, rconw = 0x%04x",
-               dut.sboxw, dut.new_sboxw, dut.round_key_gen.rconw);
-      $display("tw = 0x%04x, trw = 0x%04x", dut.round_key_gen.tw, dut.round_key_gen.trw);
+     $display("w0 = 0x%08x, w1 = 0x%08x, w2 = 0x%08x, w3 = 0x%08x",
+         dut.round_key_gen.w0, dut.round_key_gen.w1,
+         dut.round_key_gen.w2, dut.round_key_gen.w3);
+$display("w4 = 0x%08x, w5 = 0x%08x, w6 = 0x%08x, w7 = 0x%08x",
+         dut.round_key_gen.w4, dut.round_key_gen.w5,
+         dut.round_key_gen.w6, dut.round_key_gen.w7);
+$display("sboxw = 0x%08x, new_sboxw = 0x%08x, rconw = 0x%08x",
+         dut.sboxw, dut.new_sboxw, dut.round_key_gen.rconw);
+$display("tw = 0x%08x, trw = 0x%08x", dut.round_key_gen.tw, dut.round_key_gen.trw);
       $display("key_mem_new = 0x%016x, key_mem_we = 0x%01x",
                dut.key_mem_new, dut.key_mem_we);
       $display("");
@@ -279,7 +279,7 @@ module tb_aes_key_mem();
     end
   endtask // test_key_128
 
-//T?o m?t task m?i có tên là test_key_192(), t??ng t? nh? test_key_128() và test_key_256(), nh?ng v?i 13 khóa vòng (t? vòng 0 ??n vòng 12)
+//T?o m?t task m?i cÃ³ tÃªn lÃ  test_key_192(), t??ng t? nh? test_key_128() vÃ  test_key_256(), nh?ng v?i 13 khÃ³a vÃ²ng (t? vÃ²ng 0 ??n vÃ²ng 12)
 task test_key_192(input [255 : 0] key,
                   input [127 : 0] expected00,
                   input [127 : 0] expected01,
@@ -296,7 +296,7 @@ task test_key_192(input [255 : 0] key,
                   input [127 : 0] expected12
                  );
   begin
-    $display("** Testing with 192-bit key 0x%24x", key[255 : 64]);
+    $display("** Testing with 192-bit key 0x%24x", key[191:0]);
     $display("");
 
     tb_key = key;
@@ -435,7 +435,7 @@ endtask
       reg [127 : 0] expected_13;
       reg [127 : 0] expected_14;
       
-      reg [255 : 0] key192_0;
+
 
 
       init_sim();
@@ -587,11 +587,12 @@ endtask
 //                   expected_12, expected_13, expected_14);
 
 
-      display_test_result();
-      $display("");
-      $display("*** AES core simulation done. ***");
-      $finish;
-    end // aes_key_mem_test
+  display_test_result();
+  $display("");
+  $display("*** AES core simulation done. ***");
+  $finish;
+end
+
 endmodule // tb_aes_key_mem
 
 //======================================================================
